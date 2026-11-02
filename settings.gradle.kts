@@ -1,1 +1,1 @@
-rootProject.name = "TSearch"
+rootProject.name = "TLSearch"
