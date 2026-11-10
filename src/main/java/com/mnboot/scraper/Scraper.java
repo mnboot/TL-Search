@@ -10,7 +10,7 @@ public class Scraper {
     /**
      * Create instance of Scraper
      * @param HtmlDb type of HTML database usually {@code HtmlDatabaseInMemoryImpl}
-     * @see HtmlDatabaseInMemoryImpl
+     * @see HtmlDatabaseInMemory
      */
     Scraper(HtmlDatabase HtmlDb){
         this.HtmlDb = HtmlDb;

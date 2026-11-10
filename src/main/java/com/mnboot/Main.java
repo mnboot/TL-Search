@@ -8,7 +8,7 @@ import com.mnboot.TUI.TUI;
  */
 public class Main {
 
-    static void main(String[] args) {
+    static void main() {
         // IMPORTANT: DO NOT IMPLEMENT BUSINESS LOGIC ON MAIN
         // WRITE ONLY ONE LINE: A STATIC METHOD ON THE `TUI` PACKAGE THAT RUNS WHOLE TUI
         TUI tui = new TUI();

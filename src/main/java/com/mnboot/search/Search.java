@@ -1,4 +1,4 @@
 package com.mnboot.search;
 
-public class Search {
+public interface Search {
 }

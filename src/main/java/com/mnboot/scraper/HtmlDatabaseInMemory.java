@@ -6,7 +6,7 @@ package com.mnboot.scraper;
  *
  * @see com.mnboot.scraper.HtmlDatabase
  */
-public class HtmlDatabaseInMemoryImpl implements HtmlDatabase{
+public class HtmlDatabaseInMemory implements HtmlDatabase{
     // TODO: complete the class
 
 }

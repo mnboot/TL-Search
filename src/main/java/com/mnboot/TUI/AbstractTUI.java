@@ -1,8 +1,5 @@
 package com.mnboot.TUI;
 
-import com.mnboot.scraper.Scraper;
-import com.mnboot.search.Search;
-
 /**
  * TUI skeleton
  * @implNote Do not write business logic from scratch, only use objects from Scraper and Search
