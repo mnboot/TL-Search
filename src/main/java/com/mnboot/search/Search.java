@@ -1,4 +1,8 @@
 package com.mnboot.search;
 
-public interface Search {
+import com.mnboot.scraper.HtmlDocument;
+
+public class Search {
+
+
 }

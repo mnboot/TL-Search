@@ -8,4 +8,5 @@ package com.mnboot.scraper;
 interface HtmlDatabase {
     //TODO: add CRUD operations
 
+
 }
