@@ -32,6 +32,8 @@ public class Scraper {
                 .title(doc.title())
                 .body(doc.body().text())
                 .build();
+
+
         HtmlDb.insert(htmlDocument);
         return htmlDocument;
     }

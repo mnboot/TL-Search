@@ -25,7 +25,6 @@ import java.net.URL;
  *
  */
 @Data
-
 public final class HtmlDocument  {
 
     public static final double URL_SCORE = 4.0; // the most priority
@@ -41,8 +40,8 @@ public final class HtmlDocument  {
     @Builder // this is a cool one
     public HtmlDocument(String url, String title, String body) {
         setUrl(url);
-        this.title = title;
-        this.body = body;
+        setTitle(title);
+        setBody(body);
     }
 
     /**
