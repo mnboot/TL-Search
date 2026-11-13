@@ -4,7 +4,7 @@ package com.mnboot.scraper;
 //TODO: complete Scraping
 public class Scraper {
 
-    //TODO:
+
     private HtmlDatabase HtmlDb;
 
     /**
