@@ -10,7 +10,7 @@ import java.util.List;
  * @see com.mnboot.scraper.HtmlDatabase
  */
 public class HtmlDatabaseInMemory implements HtmlDatabase{
-    private ArrayList<HtmlDocument> arrDb;
+    private final ArrayList<HtmlDocument> arrDb = new ArrayList<>();
 
     /**
      * gets all documents in a database

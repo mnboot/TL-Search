@@ -25,11 +25,10 @@ import java.net.URL;
  *
  */
 @Data
-@Builder // this is a cool one
-public final class HtmlDocument {
+
+public final class HtmlDocument  {
 
     public static final double URL_SCORE = 4.0; // the most priority
-    @Getter
     private String url;
 
     public static final double TITLE_SCORE = 3.0; // the second most priority
@@ -38,6 +37,13 @@ public final class HtmlDocument {
     public static final double BODY_SCORE = 1.0; // the least most priority
     private String body;
 
+
+    @Builder // this is a cool one
+    public HtmlDocument(String url, String title, String body) {
+        setUrl(url);
+        this.title = title;
+        this.body = body;
+    }
 
     /**
      * validate input to be web URL
