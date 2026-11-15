@@ -7,7 +7,7 @@ import java.util.List;
  * @see HtmlDocument
  * @see HtmlDatabaseInMemory
  */
-interface HtmlDatabase {
+public interface HtmlDatabase {
     //TODO: add CRUD operations
 
     /**
