@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 //TODO: complete Scraping
@@ -26,17 +27,30 @@ public class Scraper {
     }
 
     public HtmlDocument getHtmlFromURL(String url) throws IOException {
-        Document doc = Jsoup.connect(url)
-                .userAgent("TL-Scraper") // unnecessary
-                .get();
+        try {
+            Document doc = Jsoup.connect(url)
+                    .userAgent("TL-Scraper")
+                    .get();
 
-        HtmlDocument htmlDocument = HtmlDocument.builder()
-                .url(url)
-                .title(doc.title())
-                .body(doc.body().text())
-                .build();
-        HtmlDb.insert(htmlDocument);
-        return htmlDocument;
+            HtmlDocument htmlDocument = HtmlDocument.builder()
+                    .url(url)
+                    .title(doc.title())
+                    .body(doc.body().text())
+                    .build();
+
+            HtmlDb.insert(htmlDocument);
+            return htmlDocument;
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid URL: " + url);
+            return null;
+
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            return null;
+        }
+
+
     }
 
 

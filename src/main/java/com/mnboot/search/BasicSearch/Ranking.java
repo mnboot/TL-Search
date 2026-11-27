@@ -1,5 +1,6 @@
-package com.mnboot.search;
+package com.mnboot.search.BasicSearch;
 
+import com.mnboot.scraper.HtmlDatabase;
 import com.mnboot.scraper.HtmlDocument;
 import com.mnboot.scraper.Scraper;
 
@@ -14,9 +15,9 @@ public class Ranking {
      * @param word a specific word to use it on storing record
      * @return returns a full arraylist hat each object includes data for output and score
      */
-    public static ArrayList<StoreDataAndScore> StoreDataAndScore(Scraper db, String word){
+    public static ArrayList<StoreDataAndScore> StoreDataAndScore(HtmlDatabase db, String word){
 
-        List<HtmlDocument> allDocs = db.getAllHtmlDocuments();
+        List<HtmlDocument> allDocs = db.getAll();
 
         ArrayList<StoreDataAndScore> AllData = new ArrayList<>();
 
@@ -64,12 +65,12 @@ public class Ranking {
      * Printing all HTML documents on descending score value which is determined by searching a word
      * @param allData passing allData to print allData on screen
      */
-    public static void PrintALlDatas(ArrayList<StoreDataAndScore> allData){
+    public static void PrintALlDatas(List<StoreDataAndScore> allData){
 
 
-        for(int i = 0; i < allData.size(); i++) {
-            StringBuilder data = allData.get(i).getData();
-            double score = allData.get(i).getScore();
+        for (StoreDataAndScore allDatum : allData) {
+            StringBuilder data = allDatum.getData();
+            double score = allDatum.getScore();
             System.out.println("Score: " + score);
             System.out.print(data.toString());
             System.out.println("--------------------------------------------------");

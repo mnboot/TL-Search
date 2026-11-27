@@ -12,10 +12,6 @@ import com.mnboot.scraper.Scraper;
 public class Main {
 
     public static void main(String[] args) {
-        // 1. Run the 1scraper with the Java programming Wikipedia page URL
-        runScraperAndPrintBody("https://en.wikipedia.org/wiki/Java_(programming_language)");
-
-        // 2. Start your TUI application loop
         TUI tui = new TUI();
         tui.start();
     }

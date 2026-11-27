@@ -1,4 +1,4 @@
-package com.mnboot.search;
+package com.mnboot.search.BasicSearch;
 import com.mnboot.scraper.HtmlDocument;
 import lombok.Getter;
 

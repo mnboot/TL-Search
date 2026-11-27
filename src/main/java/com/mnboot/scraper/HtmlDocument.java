@@ -28,10 +28,10 @@ import java.net.URL;
 
 public final class HtmlDocument  {
 
-    public static final double URL_SCORE = 4.0; // the most priority
+    public static final double URL_SCORE = 50.0; // the most priority
     private String url;
 
-    public static final double TITLE_SCORE = 3.0; // the second most priority
+    public static final double TITLE_SCORE = 15.0; // the second most priority
     private String title;
 
     public static final double BODY_SCORE = 1.0; // the least most priority
@@ -73,7 +73,6 @@ public final class HtmlDocument  {
      * remove protocol, "www." subdomain, query string, and fragments
      * @param url URL to be set
      * @throws IllegalArgumentException when input is not a valid URL
-     * @see
      */
     public void setUrl(String url) {
         if (!validateHttpURL(url)) {

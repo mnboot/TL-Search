@@ -2,10 +2,11 @@ package com.mnboot.search.AdvanceSearch;
 
 import com.mnboot.scraper.HtmlDocument;
 import com.mnboot.scraper.Scraper;
+import com.mnboot.search.Searchable;
 
 import java.util.*;
 
-public final class Search {
+public final class Search implements Searchable {
     private final Scraper scraper;
     private List<HtmlDocument> DbList = List.of();
 
@@ -182,17 +183,24 @@ public final class Search {
     }
 
 
-    public PriorityQueue<HtmlDocument> search(String query, int limit) {
+    /**
+     * start search then rank
+     * @param query user-inputted search query
+     * @param limit the maximum search result
+     * @return PriorityQueue of sorted descendingly (biggest score is first, lowest score is last)
+     */
+    public List<HtmlDocument> search(String query, int limit) {
+        updateDB();
 
         Map<HtmlDocument, Double> scores = new HashMap<>();
 
         PriorityQueue<HtmlDocument> queue = new PriorityQueue<>(
-                Comparator.comparingDouble(scores::get).reversed()
+                Comparator.comparingDouble(scores::get)
         );
 
         if (query == null || query.isBlank() || limit <= 0 ||
                 DbList == null || DbList.isEmpty()) {
-            return queue;
+            return List.of();
         }
 
         Map<String, Double> queryVector =
@@ -206,14 +214,14 @@ public final class Search {
 
             if (score > 0) {
                 scores.put(document, score);
-                queue.offer(document);
+                queue.offer(document); // enqueue
 
                 if (queue.size() > limit) {
-                    queue.poll();
+                    queue.poll(); // dequeue
                 }
             }
         }
 
-        return queue;
+        return queue.stream().toList().reversed();
     }
 }

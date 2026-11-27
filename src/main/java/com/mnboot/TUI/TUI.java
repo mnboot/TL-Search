@@ -4,16 +4,39 @@ import com.mnboot.scraper.HtmlDatabase;
 import com.mnboot.scraper.HtmlDatabaseInMemory;
 import com.mnboot.scraper.HtmlDocument;
 import com.mnboot.scraper.Scraper;
-import com.mnboot.search.Ranking;
-import com.mnboot.search.StoreDataAndScore;
+import com.mnboot.search.AdvanceSearch.Search;
+import com.mnboot.search.Searchable;
 
-import javax.swing.text.html.HTMLDocument;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class TUI extends AbstractTUI{
 
-    Scraper scraper;
+
     private final HtmlDatabase db = new HtmlDatabaseInMemory();
+    private final Scraper scraper = new Scraper(db);
+    private final Searchable search = new Search(scraper);
+    private final int MAXIMUM_QUERY_RESULT = 10;
+
+
+
+    final int MAXIMUM_BODY_LIMIT = 75;
+    private String limitText(String text){
+        if(text.length() > MAXIMUM_BODY_LIMIT){
+            return text.substring(0, MAXIMUM_BODY_LIMIT) + "...";
+        }
+        return text;
+    }
+    private void printAllWeb(List<HtmlDocument> searchResult){
+        for (int i = 0; i < searchResult.size(); i++) {
+            System.out.println(i+1 + ": ");
+            System.out.println("---------------------");
+            System.out.println("URL:   "+ searchResult.get(i).getUrl());
+            System.out.println("Title: "+ searchResult.get(i).getTitle());
+            System.out.println("Body:  "+ limitText(searchResult.get(i).getBody()));
+            System.out.println("--------------------");
+        }
+    }
 
     private static final String GREETING = """
              _       __     __                             __           ________       _____                      __ \s
@@ -23,13 +46,12 @@ public class TUI extends AbstractTUI{
             |__/|__/\\___/_/\\___/\\____/_/ /_/ /_/\\___/   \\__/\\____/    /_/ /_____/   /____/\\___/\\__,_/_/   \\___/_/ /_/\s
             
             """;
-    private static final io IO = new io();
 
     /**
      * entry point, welcome user and gives option to either use Scraper or Search
      */
     @Override
-    @SuppressWarnings("InfiniteLoopStatement") // my IDE complains about infinite loop
+    @SuppressWarnings("InfiniteLoopStatement") // my IDE complains about infinite loops
     public void start() {
         System.out.println(GREETING);
         while (true) {
@@ -40,7 +62,7 @@ public class TUI extends AbstractTUI{
             } else {
                 switch (userOption) {
                     case 1 -> scraper();
-                    case 2 -> search();
+                    case 2 -> searching();
                     default -> System.err.println("Error: no option for input " + userOption);
                 }
             }
@@ -72,9 +94,6 @@ public class TUI extends AbstractTUI{
         String url = IO.readln();
 
         try {
-            // Initialize scraper
-            scraper = new Scraper(db);
-
             // This fetches the page and stores it in the in-memory database
             HtmlDocument document = scraper.getHtmlFromURL(url);
 
@@ -87,22 +106,52 @@ public class TUI extends AbstractTUI{
                 System.out.println("Body  : " + document.getBody());
                 System.out.println("========================================\n");
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * TUI for Search
      */
     @Override
+    protected void searching() {
+        String input;
+        do {
+            System.out.print("Enter URL (-1 for exit): ");
+            input = IO.readln();
+            if(!Objects.equals(input, "-1")){
+                System.out.println("Searching for \"" + input + "\"");
+                List<HtmlDocument> result = search.search(input, MAXIMUM_BODY_LIMIT);
+                printAllWeb(result);
+            }
+        }while (!Objects.equals(input, "-1"));
+
+
+    }
+
+
+
+    /*@Override
+    protected void search(){
+
+     */
+
+
+
+
+    /**
+     * TUI for Search
+     */
+    /*@Override
     protected void search() {
 
         System.out.print("Search for the term: ");
         String word = IO.readln();
 
         // Let Ranking handle gathering and scoring all documents from the scraper instance
-        ArrayList<StoreDataAndScore> results = Ranking.StoreDataAndScore(scraper, word);
+        ArrayList<StoreDataAndScore> results = Ranking.StoreDataAndScore(scraper.getHtmlDb(), word);
 
         if (results != null && !results.isEmpty()) {
             // Sort the results in-place using QuickSort (descending order by score)
@@ -115,4 +164,5 @@ public class TUI extends AbstractTUI{
         }
 
     }
+     */
 }

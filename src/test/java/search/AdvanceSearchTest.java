@@ -8,6 +8,7 @@ import com.mnboot.search.AdvanceSearch.Search;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class AdvanceSearchTest {
@@ -17,10 +18,13 @@ public class AdvanceSearchTest {
         Scraper scraper = new Scraper(Db);
         scraper.getHtmlFromURL("https://en.wikipedia.org/wiki/Java_(programming_language)");
         scraper.getHtmlFromURL("https://en.wikipedia.org/wiki/Jakarta_EE");
+        scraper.getHtmlFromURL("https://www.w3schools.com/java/");
+
+
         scraper.getHtmlFromURL("https://en.wikipedia.org/wiki/Kuwait");
         Search search = new Search(scraper);
 
-        PriorityQueue<HtmlDocument> result = search.search("what is java", 3);
+        List<HtmlDocument> result = search.search("what is java", 3);
         System.out.println(result);
 
     }

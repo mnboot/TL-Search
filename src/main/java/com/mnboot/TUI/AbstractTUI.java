@@ -22,7 +22,7 @@ public abstract class AbstractTUI {
     /**
      * TUI for Search
      */
-    abstract protected void search();
+    abstract protected void searching();
 
 
 }

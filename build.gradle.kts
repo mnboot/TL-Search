@@ -1,6 +1,11 @@
 plugins {
     id("java")
+    application
 }
+application {
+    mainClass = "com.mnboot.Main"
+}
+
 
 group = "com.mnboot"
 version = "1.0-SNAPSHOT"
@@ -9,12 +14,13 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.44")
-    annotationProcessor("org.projectlombok:lombok:1.18.44")
 
-    testCompileOnly("org.projectlombok:lombok:1.18.44")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.44")
+dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.48")
+    annotationProcessor("org.projectlombok:lombok:1.18.48")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.48")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.48")
 
     implementation("org.codejargon.feather:feather:1.0")
     implementation("org.jsoup:jsoup:1.24.1")
@@ -25,4 +31,10 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+tasks.named<JavaExec>("run"){
+
+    standardInput = System.`in`
+    logging.captureStandardOutput(LogLevel.QUIET)
+    logging.captureStandardError(LogLevel.QUIET)
 }
