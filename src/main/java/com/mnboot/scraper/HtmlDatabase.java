@@ -7,14 +7,14 @@ import java.util.List;
  * @see HtmlDocument
  * @see HtmlDatabaseInMemory
  */
-interface HtmlDatabase {
+public interface HtmlDatabase {
     //TODO: add CRUD operations
 
     /**
      * gets all documents in a database
      * @return List of all documents
      */
-    List<HtmlDocument> getAll();
+    public List<HtmlDocument> getAll();
 
     /**
      * insert document into Database

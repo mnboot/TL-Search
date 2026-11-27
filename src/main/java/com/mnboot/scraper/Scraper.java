@@ -1,6 +1,7 @@
 package com.mnboot.scraper;
 
 
+import lombok.Getter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class Scraper {
 
 
+    @Getter
     private HtmlDatabase HtmlDb;
 
     /**
@@ -20,6 +22,7 @@ public class Scraper {
      */
     public Scraper(HtmlDatabase HtmlDb){
         this.HtmlDb = HtmlDb;
+
     }
 
     public HtmlDocument getHtmlFromURL(String url) throws IOException {
@@ -38,7 +41,5 @@ public class Scraper {
         return htmlDocument;
     }
 
-    public List<HtmlDocument> getAllHtmlDocuments(){
-        return HtmlDb.getAll();
-    }
+
 }
