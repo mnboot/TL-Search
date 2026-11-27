@@ -25,6 +25,7 @@ import java.net.URL;
  *
  */
 @Data
+
 public final class HtmlDocument  {
 
     public static final double URL_SCORE = 4.0; // the most priority
@@ -40,8 +41,8 @@ public final class HtmlDocument  {
     @Builder // this is a cool one
     public HtmlDocument(String url, String title, String body) {
         setUrl(url);
-        setTitle(title);
-        setBody(body);
+        this.title = title;
+        this.body = body;
     }
 
     /**
@@ -72,7 +73,7 @@ public final class HtmlDocument  {
      * remove protocol, "www." subdomain, query string, and fragments
      * @param url URL to be set
      * @throws IllegalArgumentException when input is not a valid URL
-     * @see validateHttpURL
+     * @see
      */
     public void setUrl(String url) {
         if (!validateHttpURL(url)) {
